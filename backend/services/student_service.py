@@ -295,7 +295,9 @@ def import_students_from_excel(file_stream, target_user_id):
 
     for idx, raw_c in enumerate(header):
         col = raw_c.lower().replace("_", " ").replace("-", " ").strip()
-        if "name" in col or "student" in col:
+        if "class" in col or "section" in col or "sec" in col:
+            class_idx = idx
+        elif "name" in col or "student" in col:
             name_idx = idx
         elif "cgpa" in col or "gpa" in col or "grade" in col:
             cgpa_idx = idx
@@ -303,8 +305,6 @@ def import_students_from_excel(file_stream, target_user_id):
             course_idx = idx
         elif "program" in col or "degree" in col:
             program_idx = idx
-        elif "class" in col or "section" in col or "sec" in col:
-            class_idx = idx
         elif "admission" in col or "adm" in col or "joining" in col or "admit" in col:
             adm_year_idx = idx
         elif "grad" in col or "passout" in col or "batch" in col:

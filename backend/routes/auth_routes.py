@@ -131,5 +131,10 @@ def get_current_user():
             "error": "User not found"
         }), 404
 
-    return jsonify(user.to_dict()), 200
+    user_data = user.to_dict()
+    return jsonify({
+        **user_data,
+        "user": user_data
+    }), 200
+
 
